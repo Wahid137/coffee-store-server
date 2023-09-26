@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const { MongoClient, ServerApiVersion } = require('mongodb');
 require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -34,7 +34,7 @@ async function run() {
             res.send(options)
         })
 
-        app.get('/coffees/:id', async (req, res) => {
+        app.get('/coffee/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const result = await coffeeCollection.findOne(query);
@@ -48,7 +48,7 @@ async function run() {
             res.send(result);
         })
 
-        app.put('/coffees/:id', async (req, res) => {
+        app.put('/coffee/:id', async (req, res) => {
             const id = req.params.id;
             const filter = { _id: new ObjectId(id) }
             const options = { upsert: true };
@@ -70,7 +70,7 @@ async function run() {
             res.send(result);
         })
 
-        app.delete('/coffees/:id', async (req, res) => {
+        app.delete('/coffee/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: new ObjectId(id) }
             const result = await coffeeCollection.deleteOne(query);
